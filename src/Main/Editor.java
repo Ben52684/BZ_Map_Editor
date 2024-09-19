@@ -13,7 +13,7 @@ public class Editor implements Runnable {
     public Editor () {
         initClasses();
         editorPanel = new EditorPanel(this);
-        viewMenu = new MainMenuView(editorPanel);
+        viewMenu = new MainMenuView();
         editorPanel.requestFocus();
         startEditor();
     }

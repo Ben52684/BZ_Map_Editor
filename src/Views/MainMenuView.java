@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class MainMenuView extends JFrame {
 
-    public MainMenuView(EditorPanel editorPanel) {
+    public MainMenuView() {
 
         setTitle("BZ Level Editor");
         setSize(1280, 720);
@@ -18,7 +18,7 @@ public class MainMenuView extends JFrame {
         JButton loadLevelButton = new JButton("Load Level");
 
         newLevelButton.addActionListener(e -> {
-            new EditorView(editorPanel);
+            new EditorView();
             dispose();
         });
         loadLevelButton.addActionListener(e -> {

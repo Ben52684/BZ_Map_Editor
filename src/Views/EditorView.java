@@ -13,11 +13,11 @@ public class EditorView extends JFrame {
     ActionPanel actionsPanel;
     SpritePanel spritePanel;
 
-    public EditorView(EditorPanel editorPanel) {
+    public EditorView() {
         setTitle("BZ Level Editor");
-        setSize(1280, 720); // Full screen size
+        setSize(1800, 900); // Full screen size
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initPanels(editorPanel);
+        initPanels();
 
         // Create SpringLayout
         SpringLayout layout = new SpringLayout();
@@ -32,7 +32,7 @@ public class EditorView extends JFrame {
         setVisible(true);
     }
 
-    private void initPanels(EditorPanel editorPanel) {
+    private void initPanels() {
         canvasPanel = new CanvasPanel();
         actionsPanel = new ActionPanel();
         spritePanel = new SpritePanel();
@@ -40,22 +40,19 @@ public class EditorView extends JFrame {
 
     private void initConstraints(SpringLayout layout) {
 
-        // Constraints for the canvas (Top-left quarter)
         layout.putConstraint(SpringLayout.WEST, canvasPanel, 0, SpringLayout.WEST, getContentPane());
         layout.putConstraint(SpringLayout.NORTH, canvasPanel, 0, SpringLayout.NORTH, getContentPane());
-        layout.putConstraint(SpringLayout.EAST, canvasPanel, -640, SpringLayout.EAST, getContentPane());
-        layout.putConstraint(SpringLayout.SOUTH, canvasPanel, -360, SpringLayout.SOUTH, getContentPane());
+        layout.putConstraint(SpringLayout.EAST, canvasPanel, 0, SpringLayout.EAST, getContentPane());
+        layout.putConstraint(SpringLayout.SOUTH, canvasPanel, -400, SpringLayout.SOUTH, getContentPane());
 
-        // Constraints for the sprite library (Right half)
-        layout.putConstraint(SpringLayout.WEST, spritePanel, 640, SpringLayout.WEST, getContentPane());
-        layout.putConstraint(SpringLayout.NORTH, spritePanel, 0, SpringLayout.NORTH, getContentPane());
+        layout.putConstraint(SpringLayout.WEST, spritePanel, 900, SpringLayout.WEST, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, spritePanel, 600, SpringLayout.NORTH, getContentPane());
         layout.putConstraint(SpringLayout.EAST, spritePanel, 0, SpringLayout.EAST, getContentPane());
         layout.putConstraint(SpringLayout.SOUTH, spritePanel, 0, SpringLayout.SOUTH, getContentPane());
 
-        // Constraints for the actions panel (Bottom-left)
         layout.putConstraint(SpringLayout.WEST, actionsPanel, 0, SpringLayout.WEST, getContentPane());
-        layout.putConstraint(SpringLayout.NORTH, actionsPanel, -360, SpringLayout.SOUTH, getContentPane());
-        layout.putConstraint(SpringLayout.EAST, actionsPanel, -640, SpringLayout.EAST, getContentPane());
+        layout.putConstraint(SpringLayout.NORTH, actionsPanel, 600, SpringLayout.NORTH, getContentPane());
+        layout.putConstraint(SpringLayout.EAST, actionsPanel, 900, SpringLayout.EAST, getContentPane());
         layout.putConstraint(SpringLayout.SOUTH, actionsPanel, 0, SpringLayout.SOUTH, getContentPane());
     }
 }

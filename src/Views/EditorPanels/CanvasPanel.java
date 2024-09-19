@@ -8,30 +8,49 @@ import java.awt.*;
 
 public class CanvasPanel extends JPanel {
 
-    MapSize[] listOfMapSizes = {MapSize.SMALL, MapSize.MEDIUM, MapSize.LARGE};
-    MapSize selectedSize = MapSize.SMALL;
+    private MapSize[] listOfMapSizes = {MapSize.SMALL, MapSize.MEDIUM, MapSize.LARGE};
+    private MapSize selectedSize = MapSize.SMALL;
+    private JPanel gridPanel;
 
     public CanvasPanel() {
 
-        // Create the canvas (Top-left quarter)
-        setLayout(new GridLayout(selectedSize.getWidth(), selectedSize.getHeight()));
-        setBorder(BorderFactory.createTitledBorder("Canvas"));
-        setBackground(Color.LIGHT_GRAY);
-        JComboBox<MapSize> sizeDropdown = new JComboBox<>(listOfMapSizes);
+        setLayout((new BorderLayout()));
 
+        gridPanel = new JPanel();
+        gridPanel.setLayout(new GridLayout(selectedSize.getWidth(), selectedSize.getHeight()));
+        gridPanel.setBorder(BorderFactory.createTitledBorder("Canvas"));
+        gridPanel.setBackground(Color.LIGHT_GRAY);
 
+        JScrollPane scrollPane = new JScrollPane(gridPanel);
+        scrollPane.setPreferredSize(new Dimension(2000, 2000));
+        add(scrollPane, BorderLayout.CENTER);
 
-
-
+        updateGrid();
     }
 
-    public void createGridOfCanvas() {
-        for (int i = 1; i <= 9; i++) {
-            JPanel panel = new JPanel(); // Create a new JPanel for each cell
-            panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); // Add a black border of thickness 2
-            panel.add(new JLabel("Cell " + i)); // Add a label inside the panel
-            add(panel); // Add the panel to the frame (GridLayout will arrange them)
+    private void updateGrid() {
+
+        // Remove all current components from gridPanel
+        gridPanel.removeAll();
+
+        // Create grid cells based on selected size
+        int width = selectedSize.getWidth();
+        int height = selectedSize.getHeight();
+
+        // Update layout based on selected size
+        gridPanel.setLayout(new GridLayout(height, width));
+
+        // Create cells for the grid
+        for (int i = 1; i <= width * height; i++) {
+            JPanel panel = new JPanel();
+            panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            panel.add(new JLabel("Cell " + i));
+            gridPanel.add(panel);
         }
+
+        // Repaint and revalidate to reflect the new components
+        revalidate();
+        repaint();
     }
 
 }
