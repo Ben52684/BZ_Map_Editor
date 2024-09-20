@@ -6,16 +6,13 @@ import java.awt.*;
 
 public class Editor implements Runnable {
 
-    private EditorPanel editorPanel;
     private Thread editorLoop;
     private MainMenuView viewMenu;
 
     public Editor () {
         initClasses();
-        editorPanel = new EditorPanel(this);
         viewMenu = new MainMenuView();
-        editorPanel.requestFocus();
-        startEditor();
+//        startEditor();
     }
 
     private void initClasses() {
@@ -34,7 +31,6 @@ public class Editor implements Runnable {
     public void run() {
 
         while (true) {
-            editorPanel.repaint();
             Toolkit.getDefaultToolkit().sync();
         }
     }

@@ -1,16 +1,20 @@
 package Views.EditorPanels;
 
+import Helpers.CellPanel;
 import Helpers.MapSize;
-import Main.EditorPanel;
+import MyInputs.MouseInputs;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class CanvasPanel extends JPanel {
+
 
     private MapSize[] listOfMapSizes = {MapSize.SMALL, MapSize.MEDIUM, MapSize.LARGE};
     private MapSize selectedSize = MapSize.SMALL;
     private JPanel gridPanel;
+    private int cellClicked = 0;
 
     public CanvasPanel() {
 
@@ -34,18 +38,27 @@ public class CanvasPanel extends JPanel {
         gridPanel.removeAll();
 
         // Create grid cells based on selected size
-        int width = selectedSize.getWidth();
-        int height = selectedSize.getHeight();
+        int rows = selectedSize.getHeight();
+        int cols = selectedSize.getWidth();
 
         // Update layout based on selected size
-        gridPanel.setLayout(new GridLayout(height, width));
+        gridPanel.setLayout(new GridLayout(rows, cols));
 
-        // Create cells for the grid
-        for (int i = 1; i <= width * height; i++) {
-            JPanel panel = new JPanel();
-            panel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-            panel.add(new JLabel("Cell " + i));
-            gridPanel.add(panel);
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                CellPanel cell = new CellPanel(row, col);
+                cell.setPreferredSize(new Dimension(32, 32));
+                cell.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+                cell.addMouseListener(new MouseInputs() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        int cellRow = cell.getRow();
+                        int cellCol = cell.getCol();
+                        System.out.println("Clicked on cell at row: " + cellRow + " col: " + cellCol);
+                    }
+                });
+                gridPanel.add(cell);
+            }
         }
 
         // Repaint and revalidate to reflect the new components

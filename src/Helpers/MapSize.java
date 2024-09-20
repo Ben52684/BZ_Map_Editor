@@ -2,9 +2,9 @@ package Helpers;
 
 public enum MapSize {
 
-    SMALL(50, 20),
-    MEDIUM(100, 20),
-    LARGE(200, 20);
+    SMALL(51, 21),
+    MEDIUM(101, 20),
+    LARGE(201, 20);
 
     private final int height;
     private final int width;

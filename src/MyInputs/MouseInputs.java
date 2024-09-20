@@ -8,9 +8,7 @@ import java.awt.event.MouseMotionListener;
 
 public class MouseInputs implements MouseListener, MouseMotionListener {
 
-    private EditorPanel editorPanel;
-    public MouseInputs(EditorPanel editorPanel){
-        this.editorPanel = editorPanel;
+    public MouseInputs(){
 
     }
 

@@ -1,9 +1,8 @@
 package Views;
 
-import Main.EditorPanel;
-
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class MainMenuView extends JFrame {
 
@@ -18,7 +17,11 @@ public class MainMenuView extends JFrame {
         JButton loadLevelButton = new JButton("Load Level");
 
         newLevelButton.addActionListener(e -> {
-            new EditorView();
+            try {
+                new EditorView();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             dispose();
         });
         loadLevelButton.addActionListener(e -> {
